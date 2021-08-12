@@ -1,13 +1,19 @@
-import { getGreeting } from '../support/app.po';
+import { getHarness } from '@jscutlery/cypress-harness';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { DemoButtonComponentHarness } from '@cypress-harness/demo';
 
 describe('cypress-harness-app', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+  it('should get button text with MatButtonHarness', () => {
+    // THIS IS WORKING (when you remove the other testcase) 🎉
+    const harness = getHarness(MatButtonHarness);
+    harness.getText().should('eq', 'Demo button');
+  });
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to cypress-harness-app!');
+  it('should get button text with DemoButtonComponentHarness', () => {
+    // THIS IS NOT WORKING 😭
+    const harness = getHarness(DemoButtonComponentHarness);
+    harness.getText().should('eq', 'Demo button');
   });
 });

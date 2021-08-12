@@ -119,6 +119,31 @@
           }
         }
       }
+    },
+    "demo": {
+      "projectType": "library",
+      "root": "libs/demo",
+      "sourceRoot": "libs/demo/src",
+      "prefix": "cypress-harness",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/demo"],
+          "options": {
+            "jestConfig": "libs/demo/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/demo/src/**/*.ts",
+              "libs/demo/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
